@@ -1,0 +1,6 @@
+Clare Lindley   Book    100 1
+Clare Lindley   TV  500 2
+Clare Lindley   Kindle  80  3
+Anna Cousins    Book    100 2
+Anna Cousins    TV  500 2
+Anna Cousins    iPad    900 1
