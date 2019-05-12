@@ -1,6 +1,5 @@
 const request = require('request');
 
-
 // 1. Get the thing
 // 2. handle errors with the request
 // 3. Handle errors parsing the JSON
@@ -30,16 +29,14 @@ getStarWarsData(uris[0])
     .then(
     function(body) {
         let planet = JSON.parse(body);
-        return getStarWarsData(planet['residents'][0]);
+
+        let uris = planet['residents'];
+        uris.reduce(function(i){
+            console.log(uris[i]);
+        },0);
+
+
     })
-    .then(
-    function(body){
-        let person = JSON.parse(body);
-        let personDescription = `A person who lives here is ${person['name']}`
-        console.log(personDescription);
-    }
-    )
     .catch(function(e){
         console.log(e.message);
 });
-
