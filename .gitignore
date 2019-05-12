@@ -1,3 +1,4 @@
 # IntelliJ and other IDEs
 .idea
 *.iml
+promises/node_modules/

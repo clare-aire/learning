@@ -1,28 +1,8 @@
 const request = require('request');
 
-
-// 1. Create the Promise
-function getPlanetsWithPromise(){
-
-    return new Promise(function (resolve, reject){
-        request('https://swapi.co/api/planets/1/', function (error, response, body) {
-            if (error) reject(error);
-            else resolve(body);
-        });
-    });
-
-}
-
-// 2. Consume the Promise
-getPlanetsWithPromise().then(
-    function(body) {
-
-        let planet = JSON.parse(body);
-        let planetDescription = `The planet's name is ${planet['name']} and its population is ${planet["population"]}`
-        console.log(planetDescription);
-    });
-
-
+// 1. Get the thing and handle errors with the request
+// 2. Handle errors parsing the JSON
+// 3. if successful make another call to lookup the inhabitants and display their names
 
 function getPlanetsWithCallback(callback){
 
@@ -39,15 +19,13 @@ function getPlanetsWithCallback(callback){
 function displayPlanets(body){
 
     let planet = JSON.parse(body);
-    let planetDescription = `The planet's name is ${planet['name']} and its population is ${planet["population"]}`
+    let planetDescription = `The planet's name is ${planet['name']} and its terrain is ${planet["terrain"]}`
     console.log(planetDescription);
 }
 
-getPlanetsWithCallback(displayPlanets)
+getPlanetsWithCallback(displayPlanets);
 
-// Learn Concepts
-// Translate to ES6
-// High level patterns and design
+
 
 
 
