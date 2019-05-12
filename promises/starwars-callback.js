@@ -5,7 +5,13 @@ const request = require('request');
 // 3. Handle errors parsing the JSON
 // 4. if successful make another call to lookup the inhabitants and display their names
 
-function getPlanetsWithCallback(uri, callback){
+let uris = [
+    'https://swapi.co/api/planets/1/',
+    'https://swapi.co/api/planets/1/abc',
+    'abc'
+];
+
+function getStarWarsData(uri, callback){
 
     request(uri, function (error, response, body) {
         if (error) {
@@ -17,27 +23,33 @@ function getPlanetsWithCallback(uri, callback){
 
 }
 
-let uris = [
-    'https://swapi.co/api/planets/1/',
-    'https://swapi.co/api/planets/1/abc',
-    'abc'
-];
 
-
-getPlanetsWithCallback(uris[0], displayPlanets);
-
-function displayPlanets(body){
+getStarWarsData(uris[0], function(body){
 
     try{
         let planet = JSON.parse(body);
-        let planetDescription = `The planet's name is ${planet['name']} and its terrain is ${planet["terrain"]}`
-        console.log(planetDescription);
+        getStarWarsData(planet['residents'][0], function(body){
+
+            try{
+                let person = JSON.parse(body);
+                let personDescription = `A person who lives here is ${person['name']}`
+                console.log(personDescription);
+            }
+            catch(e){
+                console.log(e.message);
+            }
+
+        })
+
     }
     catch(e){
         console.log(e.message);
     }
 
-}
+});
+
+
+
 
 
 
