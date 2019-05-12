@@ -11,7 +11,7 @@ let orders = {
     ]
 };
 
-// can't do import without babel
+// can't do import without babel so using require
 let fs = require('fs')
 
 let output = fs.readFileSync('data.txt', 'utf-8')
