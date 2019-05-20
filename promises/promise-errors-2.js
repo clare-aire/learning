@@ -2,7 +2,7 @@ function asyncTask(url) {
     return new Promise((resolve, reject) => {
         if (url) {
             return setTimeout(() => {
-                resolve(asyncTask2());
+                resolve(asyncTask2(url));
             }, 500);
         }
 
@@ -27,6 +27,9 @@ function asyncTask2(url) {
 }
 
 asyncTask('google.com')
+    .then((response) => {
+        console.log(response);
+    })
     .catch(err => {
         console.log('failed ', err); // { error: 'url missing in async task 2' }
         return err;

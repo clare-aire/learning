@@ -34,12 +34,33 @@ getStarWarsData(uris[0])
     })
     .then(
     function(body){
+        console.log('HERE?!');
+        console.log(body);
         let person = JSON.parse(body);
         let personDescription = `A person who lives here is ${person['name']}`
         console.log(personDescription);
     }
     )
     .catch(function(e){
+        console.log('in catch')
         console.log(e.message);
 });
 
+// My experimemts with this show also that if you implement onrejected when chaining promises
+// even though the first promise rejects, execution still moves into the next Promises onfulfilled!
+// we just barrel on down the road to the next .then()'s onfullfilled - which obviously fails as its dependent
+// on the success of the previous one! To stop this, I can catch the error and halt exexution by implementing .catch.
+// therefore a good rule of thumb is ABC - Always Be Catching!
+
+
+/**
+ * Why is implementing onfulfilled and onrejected considered am anti-pattern?
+ *
+ * if onfulfilled throws an error, this implies that promise returned by then is rejected - so even though
+ * you're catching the initial rejection, .then() will reject and you'll get a 'UnhandledPromiseRejectionWarning: Unhandled promise rejection'
+ *
+ * I prefer the pattern of ALWAYS implementing catch - I see it as giving you more comprehensive error handling out of the box.
+ *
+ * ALSO - if the first promise in a chain is rejected, we STILL execute the next .then() it's a car crash!
+ *
+ */
