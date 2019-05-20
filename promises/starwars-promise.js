@@ -61,6 +61,6 @@ getStarWarsData(uris[0])
  *
  * I prefer the pattern of ALWAYS implementing catch - I see it as giving you more comprehensive error handling out of the box.
  *
- * ALSO - if the first promise in a chain is rejected, we STILL execute the next .then() it's a car crash!
+ * ALSO - if the first promise in a chain is rejected, we STILL execute the next .then() it's a pile up!
  *
  */
