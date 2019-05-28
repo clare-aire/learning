@@ -14,36 +14,26 @@ let uris = [
 function getStarWarsData(uri, callback){
 
     request(uri, function (error, response, body) {
-        if (error) {
-            console.log(error.message);
-        }
-        else callback(body);
+        callback(error, body);
     });
 
 
 }
 
 
-getStarWarsData(uris[0], function(body){
+getStarWarsData('https://swapi.co/api/planets/1/', function(error, body){
+
+    if(error){
+        console.log(error.message);
+        return;
+    }
 
     try{
         let planet = JSON.parse(body);
-        getStarWarsData(planet['residents'][0], function(body){
-
-            try{
-                let person = JSON.parse(body);
-                let personDescription = `A person who lives here is ${person['name']}`
-                console.log(personDescription);
-            }
-            catch(e){
-                console.log(e.message);
-            }
-
-        })
-
+        console.log(planet.name);
     }
-    catch(e){
-        console.log(e.message);
+    catch(error){
+        console.log(error.message);
     }
 
 });

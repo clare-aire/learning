@@ -17,7 +17,6 @@ let uris = [
 function getStarWarsData(uri){
 
     return new Promise(function (resolve, reject){
-
         request(uri, function (error, response, body) {
             if (error) reject(error);
             else resolve(body);
@@ -31,10 +30,20 @@ getStarWarsData(uris[0])
     .then(
     function(body) {
         let planet = JSON.parse(body);
-        console.log(planet.name);
+        return getStarWarsData(planet['residents'][0]);
     })
-    .catch(function(error){
-        console.log(error.message);
+    .then(
+    function(body){
+        console.log('HERE?!');
+        console.log(body);
+        let person = JSON.parse(body);
+        let personDescription = `A person who lives here is ${person['name']}`
+        console.log(personDescription);
+    }
+    )
+    .catch(function(e){
+        console.log('in catch')
+        console.log(e.message);
 });
 
 // My experimemts with this show also that if you implement onrejected when chaining promises

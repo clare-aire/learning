@@ -2,7 +2,7 @@ function asyncTask(url) {
     return new Promise((resolve, reject) => {
         if (url) {
             return setTimeout(() => {
-                resolve(asyncTask2(url));
+                resolve(asyncTask2());
             }, 500);
         }
 
